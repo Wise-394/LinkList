@@ -2,7 +2,7 @@
 import { IoMenu } from "react-icons/io5";
 import { useLoginModalStore } from "@/store/landingPage/useLoginModalStore";
 import { useState } from "react";
-
+import { cn } from "@/config/tailwind/clsx";
 interface NavLinks {
   label: string;
   onClick: () => void;
@@ -25,7 +25,7 @@ export function GuestHeader() {
   ];
 
   return (
-    <header className="flex flex-row h-[8vh] relative items-center p-5 ">
+    <header className="relative flex h-[8vh] flex-row items-center p-5">
       <h1 className="text-lg">LinkList</h1>
       <button
         className="ml-auto md:hidden"
@@ -33,7 +33,7 @@ export function GuestHeader() {
       >
         <IoMenu />
       </button>
-      <nav className=" flex-row ml-auto hidden md:flex">
+      <nav className="ml-auto hidden flex-row md:flex">
         {navLinks.map((nav) => (
           <button
             key={nav.label}
@@ -44,11 +44,12 @@ export function GuestHeader() {
           </button>
         ))}
       </nav>
-      <div className="absolute w-full top-full left-0 overflow-hidden">
+      <div className="absolute top-full left-0 w-full overflow-hidden">
         <nav
-          className={`flex flex-col bg-gray-400
-    transition-transform duration-300 ease-in-out md:hidden
-    ${isNavOpen ? "translate-y-0" : "-translate-y-full"}`}
+          className={cn(
+            "flex flex-col bg-gray-400 transition-transform duration-300 ease-in-out md:hidden",
+            isNavOpen ? "translate-y-0" : "-translate-y-full",
+          )}
         >
           {navLinks.map((nav) => (
             <button

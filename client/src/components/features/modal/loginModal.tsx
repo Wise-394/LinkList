@@ -1,6 +1,7 @@
 "use client";
 import { ButtonWithIcon } from "@/components/ui/buttonWithIcon";
 import { useLoginModalStore } from "@/store/landingPage/useLoginModalStore";
+import { createClient } from "@/config/supabase/client";
 import { useEffect, useRef } from "react";
 import { IoLogoGoogle } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
@@ -9,6 +10,17 @@ export function LoginModal() {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const isOpen = useLoginModalStore((state) => state.isOpen);
   const closeModal = useLoginModalStore((state) => state.closeModal);
+  const supabase = createClient();
+
+  const handleGoogleLogin = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+  };
+
   useEffect(() => {
     if (isOpen) {
       dialogRef.current?.showModal();
@@ -29,7 +41,7 @@ export function LoginModal() {
           <ButtonWithIcon
             icon={IoLogoGoogle}
             label="Sign in With Google"
-            onClick={() => {}}
+            onClick={() => handleGoogleLogin()}
           />
         </div>
 
