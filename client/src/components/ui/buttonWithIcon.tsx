@@ -11,9 +11,10 @@ export function ButtonWithIcon({ icon: Icon, label, onClick }: ButtonWithIcon) {
   return (
     <button
       onClick={onClick}
-      className="flex flex-row items-center p-2 outline-red-600 outline-1"
+      className="flex w-full flex-row items-center justify-center gap-2
+        rounded-lg bg-white p-3 outline-1 outline-gray-400"
     >
-      <Icon className="text-md" />
+      <Icon className="text-lg" />
       <p>{label} </p>
     </button>
   );

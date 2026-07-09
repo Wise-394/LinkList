@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-classnames",
+    "prettier-plugin-merge"
+  ],
+  "printWidth": 80,
+  "customAttributes": ["className"]
+}
