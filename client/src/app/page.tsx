@@ -21,8 +21,8 @@ export default function Home() {
               <LoginButton />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <div className="h-[60vh] w-80">
+          <div className="flex flex-col items-center justify-center p-2">
+            <div className="h-[60vh] max-w-80">
               <ProfileCard />
             </div>
           </div>
