@@ -22,7 +22,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center">
-            <div className="w-80">
+            <div className="h-[60vh] w-80">
               <ProfileCard />
             </div>
           </div>
