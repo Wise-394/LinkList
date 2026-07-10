@@ -9,11 +9,11 @@ export default function Home() {
       <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
         <GuestHeader />
         <main className="flex min-h-full w-full flex-1 flex-col md:grid md:grid-cols-2">
-          <div className="flex min-h-[92vh] flex-col items-center justify-start p-2 pt-[30vh] text-center md:mx-[15%] md:min-h-0 md:items-start md:text-left lg:mx-[20%]">
-            <h1 className="text-2xl md:text-3xl">
+          <div className="flex min-h-[92vh] flex-col items-center justify-start p-2 pt-[30vh] text-center md:mx-[10%] md:min-h-0 md:items-start md:text-left lg:mx-[20%]">
+            <h1 className="text-2xl font-bold lg:text-3xl">
               Just One Link. <br /> For All of your Socials
             </h1>
-            <h2 className="text-lg md:text-2xl">
+            <h2 className="text-lg lg:text-2xl">
               Build a clean page for all your socials in minutes. <br /> No
               code, no clutter, all simplified.
             </h2>
