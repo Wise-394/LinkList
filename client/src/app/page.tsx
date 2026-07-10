@@ -8,8 +8,8 @@ export default function Home() {
     <>
       <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
         <GuestHeader />
-        <main className="flex min-h-full w-full flex-1 grid-cols-2 flex-col md:grid">
-          <div className="flex flex-1 flex-col items-center justify-start p-2 pt-[30vh] text-center md:mx-[15%] md:items-start md:text-left lg:mx-[20%]">
+        <main className="flex min-h-full w-full flex-1 flex-col md:grid md:grid-cols-2">
+          <div className="flex min-h-[92vh] flex-col items-center justify-start p-2 pt-[30vh] text-center md:mx-[15%] md:min-h-0 md:items-start md:text-left lg:mx-[20%]">
             <h1 className="text-2xl md:text-3xl">
               Just One Link. <br /> For All of your Socials
             </h1>
@@ -21,8 +21,10 @@ export default function Home() {
               <LoginButton />
             </div>
           </div>
-          <div>
-            <ProfileCard />
+          <div className="flex flex-col items-center justify-center">
+            <div className="w-80">
+              <ProfileCard />
+            </div>
           </div>
         </main>
       </div>
