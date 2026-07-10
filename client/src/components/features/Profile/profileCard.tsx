@@ -1,6 +1,7 @@
 import { PictureSection } from "./pictureSection";
 import { LinksSection } from "./linksSection";
 import { ProfileDescriptionSection } from "./profileDescriptionSection";
+import { LinkItem } from "./linkItem";
 
 export function ProfileCard() {
   return (
