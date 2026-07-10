@@ -11,13 +11,10 @@ interface NavLinks {
 export function GuestHeader() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const openModal = useLoginModalStore((state) => state.openModal);
+
   const navLinks: NavLinks[] = [
     {
       label: "login",
-      onClick: () => {},
-    },
-    {
-      label: "register",
       onClick: () => {
         openModal();
       },
