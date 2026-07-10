@@ -1,21 +1,21 @@
+// components/ui/buttonWithIcon.tsx
 "use client";
-import type { IconType } from "react-icons";
-import { cn } from "@/config/tailwind/clsx";
+import type { ReactNode } from "react";
 
 interface ButtonWithIcon {
-  icon: IconType;
+  icon: ReactNode;
   label: string;
   onClick: () => void;
 }
 
-export function ButtonWithIcon({ icon: Icon, label, onClick }: ButtonWithIcon) {
+export function ButtonWithIcon({ icon, label, onClick }: ButtonWithIcon) {
   return (
     <button
       onClick={onClick}
-      className="flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-white p-3 outline-1 outline-gray-400"
+      className="flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-white p-3 text-black outline-1 outline-gray-400"
     >
-      <Icon className="text-lg" />
-      <p>{label} </p>
+      {icon}
+      <p>{label}</p>
     </button>
   );
 }

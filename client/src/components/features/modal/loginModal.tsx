@@ -32,14 +32,14 @@ export function LoginModal() {
   return (
     <dialog
       ref={dialogRef}
-      className="relative m-auto w-[80vw] max-w-80 rounded-2xl p-4 text-center"
+      className="relative m-auto w-[80vw] max-w-80 rounded-2xl p-4 text-center backdrop:bg-black/70"
     >
       <div className="flex flex-col items-center">
         <h1 className="text-2xl font-bold">Welcome To LinkList</h1>
         <h2 className="">Sign In to continue </h2>
         <div className="mt-8 w-full">
           <ButtonWithIcon
-            icon={IoLogoGoogle}
+            icon={<IoLogoGoogle />}
             label="Sign in With Google"
             onClick={() => handleGoogleLogin()}
           />

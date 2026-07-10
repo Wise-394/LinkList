@@ -25,11 +25,14 @@ export function GuestHeader() {
   ];
 
   return (
-    <header className="relative flex h-[8vh] flex-row items-center p-5">
+    <header className="sticky z-10 flex h-[8vh] w-full flex-row items-center p-5">
       <h1 className="text-lg">LinkList</h1>
       <button
         className="ml-auto md:hidden"
-        onClick={() => setIsNavOpen((state) => !state)}
+        onClick={() => {
+          console.log("hamburger clicked");
+          setIsNavOpen((state) => !state);
+        }}
       >
         <IoMenu />
       </button>
