@@ -14,14 +14,14 @@ export default function OnBoarding() {
           <label htmlFor="password" className="mt-5 font-bold">
             USERNAME
           </label>
-          <div className="text-1xl flex w-full gap-2 rounded-lg bg-gray-400 p-2">
+          <div className="text-1xl flex w-full gap-1 rounded-lg bg-gray-400 p-2">
             <p>linklist.com/</p>
             <input
               type="text"
               name="username"
               id="username"
               placeholder="enter name"
-              className="flex-1"
+              className="flex-1 pl-2"
             />
           </div>
           <p>this username is available</p>
