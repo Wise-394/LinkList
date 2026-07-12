@@ -4,6 +4,6 @@ type Props = {
   children: ReactNode;
 };
 
-export default function OnboardingLayout({ children }: Props) {
+export default function AdminLayout({ children }: Props) {
   return <div className="flex flex-1">{children}</div>;
 }
