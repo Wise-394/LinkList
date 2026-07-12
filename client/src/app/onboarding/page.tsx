@@ -1,6 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useClaimUsername } from "@/hooks/onboarding/useClaimUsername";
+import { useState } from "react";
+
 export default function OnBoarding() {
+  const { error, isPending, claimUsername } = useClaimUsername();
+  const [username, setUsername] = useState("");
   return (
     <div className="flex flex-1 items-center justify-center p-4">
       <main className="w-full max-w-110 rounded-2xl bg-gray-500 p-4">
@@ -11,7 +16,7 @@ export default function OnBoarding() {
           username later.
         </p>
         <div className="mt-5 flex flex-col">
-          <label htmlFor="password" className="mt-5 font-bold">
+          <label htmlFor="username" className="mt-5 font-bold">
             USERNAME
           </label>
           <div className="text-1xl flex w-full gap-1 rounded-lg bg-gray-400 p-2">
@@ -22,11 +27,17 @@ export default function OnBoarding() {
               id="username"
               placeholder="enter name"
               className="flex-1 pl-2"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <p>this username is available</p>
+          {error && <p>{error.message}</p>}
           <div className="mt-5">
-            <Button label="confirm" onClick={() => {}} />
+            <Button
+              disabled={isPending}
+              label={isPending ? "submitting" : "continue"}
+              onClick={() => claimUsername(username)}
+            />
           </div>
         </div>
       </main>

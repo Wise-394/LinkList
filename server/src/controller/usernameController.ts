@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { updateUsername } from '../service/userServices/updateUsername';
 
-//TODO VALIDATION
 export async function claimUsername(
   req: Request,
   res: Response,
