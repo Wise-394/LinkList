@@ -1,6 +1,6 @@
 import { fetchBackend } from "@/service/utils/fetchBackend";
 import { useMutation } from "@tanstack/react-query";
-import { getTokenClient } from "@/service/utils/getTokenClient";
+import { getTokenClient } from "@/service/utils/getToken";
 import { useRouter } from "next/navigation";
 
 async function postUsername(username: string) {
