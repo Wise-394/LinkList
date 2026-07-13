@@ -9,7 +9,7 @@ export default function AdminLayout({ children }: Props) {
   return (
     <>
       <AdminHeader />
-      <div className="flex flex-1">{children}</div>;
+      <div className="flex flex-1">{children}</div>
     </>
   );
 }
