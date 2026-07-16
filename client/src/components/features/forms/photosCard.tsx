@@ -1,13 +1,25 @@
 export function PhotosCard() {
-  <div>
-    <p>Photos</p>
+  return (
     <div>
-      <label htmlFor="profileImgInput">Profile Photo </label>
-      <input type="image" id="profileImgInput" name="profileImage" />
+      <p>Photos</p>
+      <div>
+        <label htmlFor="profileImgInput">Profile Photo </label>
+        <input
+          type="file"
+          accept="image/*"
+          id="profileImgInput"
+          name="profileImage"
+        />
+      </div>
+      <div>
+        <label htmlFor="coverImgInput">Cover Photo </label>
+        <input
+          type="file"
+          accept="image/*"
+          id="coverImgInput"
+          name="coverImage"
+        />
+      </div>
     </div>
-    <div>
-      <label htmlFor="CoverImgInput">Cover Photo </label>
-      <input type="image" id="profileImgInput" name="coverImage" />
-    </div>
-  </div>;
+  );
 }
