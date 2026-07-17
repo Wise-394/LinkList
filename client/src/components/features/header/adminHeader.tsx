@@ -33,7 +33,12 @@ export function AdminHeader() {
         <FiMenu />
       </button>
 
-      <div className="absolute top-full left-0 w-full overflow-hidden md:hidden">
+      <div
+        className={cn(
+          isMenuOpen ? "pointer-events-auto" : "pointer-events-none",
+          "absolute top-full left-0 w-full overflow-hidden md:hidden",
+        )}
+      >
         <nav
           className={cn(
             isMenuOpen ? "translate-y-0" : "-translate-y-full",
