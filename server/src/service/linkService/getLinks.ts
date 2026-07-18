@@ -1,21 +1,17 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { AppError } from '../utils/appErrors';
-import { Link } from '../../../../types/types';
+import { error } from 'node:console';
 
-export async function getUsername(
-  supabase: SupabaseClient,
-  id: string,
-): Promise<Link[]> {
+export async function getLinks(supabase: SupabaseClient, userID: string) {
   try {
     const { data, error } = await supabase
-      .from('users')
+      .from('link')
       .select('*')
-      .eq('id', id)
-      .single();
-    if (error) throw error;
+      .eq('userID', userID);
 
+    if (error) throw error;
     return data;
-  } catch (error) {
+  } catch {
     console.log(error);
     throw new AppError('failed to get data');
   }

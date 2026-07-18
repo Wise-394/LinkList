@@ -7,7 +7,7 @@ interface User {
   coverPhotoUrl: string;
 }
 
-interface Link {
+export interface Link {
   id: number;
   userId: string;
   label: string;
