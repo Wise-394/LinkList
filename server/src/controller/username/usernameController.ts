@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { updateUsername } from '../service/userServices/updateUsername';
-import { getUsername } from '../service/userServices/getUsername';
+import { updateUsername } from '../../service/userServices/updateUsername';
+import { getUsername } from '../../service/userServices/getUsername';
 
 export async function claimUsername(
   req: Request,

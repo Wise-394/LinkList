@@ -1,11 +1,11 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { AppError } from '../utils/appErrors';
-import { Link } from '../../../../types/types';
+import { User } from '../../../../types/types';
 
 export async function getUsername(
   supabase: SupabaseClient,
   id: string,
-): Promise<Link[]> {
+): Promise<User[]> {
   try {
     const { data, error } = await supabase
       .from('users')

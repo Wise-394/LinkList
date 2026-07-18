@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { requireAuth } from '../controller/authentication/requireAuth';
-import { claimUsername } from '../controller/usernameController';
+import { claimUsername } from '../controller/username/usernameController';
 import { validateUsername } from '../controller/validation/validateUsername';
 import { handleValidationResult } from '../controller/validation/handleValidationErrors';
 
