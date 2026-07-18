@@ -1,6 +1,5 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { AppError } from '../utils/appErrors';
-import { error } from 'node:console';
 
 export async function getLinks(supabase: SupabaseClient, userID: string) {
   try {
@@ -11,7 +10,7 @@ export async function getLinks(supabase: SupabaseClient, userID: string) {
 
     if (error) throw error;
     return data;
-  } catch {
+  } catch (error) {
     console.log(error);
     throw new AppError('failed to get data');
   }
