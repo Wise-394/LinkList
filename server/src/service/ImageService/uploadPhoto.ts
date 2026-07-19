@@ -1,15 +1,18 @@
 import { SupabaseClient } from '@supabase/supabase-js';
-import { AppError } from '../../utils/appErrors';
+import { AppError } from '../utils/appErrors';
 
-export async function uploadProfilePhoto(
-  supabase: SupabaseClient,
-  userID: string,
-  file: Express.Multer.File,
-) {
+interface Params {
+  supabase: SupabaseClient;
+  userID: string;
+  file: Express.Multer.File;
+  type: 'profile-photo' | 'cover-photo';
+}
+
+export async function uploadPhoto({ supabase, userID, file, type }: Params) {
   try {
     const ext = file.mimetype.split('/')[1];
     const { data, error } = await supabase.storage
-      .from('profile-photo')
+      .from(type)
       .upload(`${userID}/avatar.${ext}`, file.buffer);
 
     if (error) throw error;
