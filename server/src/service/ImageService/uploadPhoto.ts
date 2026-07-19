@@ -17,7 +17,7 @@ export async function uploadPhoto({ supabase, userID, file, type }: Params) {
 
     if (error) throw error;
 
-    return data;
+    return data.fullPath;
   } catch (error) {
     console.log(error);
     throw new AppError('failed to uplaod profile photo');

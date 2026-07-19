@@ -3,8 +3,8 @@ export interface User {
   username: string;
   name: string;
   bio: string;
-  photoUrl: string;
-  coverPhotoUrl: string;
+  profileImageUrl: string;
+  coverImageUrl: string;
 }
 
 export interface Link {

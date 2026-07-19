@@ -1,5 +1,5 @@
 import express from 'express';
-import { usernameRouter } from './routes/usernameRoutes';
+import { userRouter } from './routes/userRoute';
 import cors from 'cors';
 
 const app = express();
@@ -15,6 +15,6 @@ app.use(express.json());
 app.get('/health', (_req, res) => {
   res.send('Hello World');
 });
-app.use('/username', usernameRouter);
+app.use('/user', userRouter);
 
 export default app;
