@@ -1,7 +1,6 @@
 import { BasicInfoCard } from "@/components/features/forms/basicInfoCard";
 import { PhotosCard } from "@/components/features/forms/photosCard";
-import { LinksSection } from "@/components/features/Profile/linksSection";
-
+import { LinksSectionInput } from "@/components/features/forms/linksSectionInput";
 export default function ProfilePage() {
   return (
     <div className="flex w-full grid-cols-2 flex-col gap-2 p-2 md:grid">
@@ -9,7 +8,7 @@ export default function ProfilePage() {
         <div className="flex max-h-[90vh] w-full max-w-120 flex-col gap-2 p-2">
           <PhotosCard />
           <BasicInfoCard />
-          <LinksSection />
+          <LinksSectionInput />
         </div>
       </div>
       <div className="flex-1"></div>
