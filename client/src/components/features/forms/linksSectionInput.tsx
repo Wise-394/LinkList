@@ -11,7 +11,15 @@ interface Link {
 export function LinksSectionInput() {
   const [linkItem, setLinkItem] = useState<Link[]>([]);
   const [currentLink, setCurrentLink] = useState<Partial<Link>>({});
+
+  const validateUserInput = ({ label, link }: Partial<Link>) => {
+    if (!label || !link) return false;
+    if ((label?.length ?? 0) < 4 || (link?.length ?? 0) < 4) return false;
+    return true;
+  };
+
   const handleAddNewLink = () => {
+    if (!validateUserInput(currentLink)) return;
     setLinkItem((state) => [
       ...state,
       {
