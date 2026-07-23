@@ -1,33 +1,34 @@
 "use client";
 import { useState } from "react";
 import { LinkItemInput } from "./linkItemInput";
-
-interface Link {
-  id: string;
-  label: string;
-  link: string;
-}
+import { useLinkInputFormStore } from "@/store/formInput/useLinkInputFormStore";
+import { Link } from "../../../../../types/types";
 
 export function LinksSectionInput() {
-  const [linkItem, setLinkItem] = useState<Link[]>([]);
+  const linkItem = useLinkInputFormStore((state) => state.link);
+  const addLink = useLinkInputFormStore((state) => state.addLink);
+  const [error, setError] = useState<string | null>(null);
   const [currentLink, setCurrentLink] = useState<Partial<Link>>({});
 
-  const validateUserInput = ({ label, link }: Partial<Link>) => {
-    if (!label || !link) return false;
-    if ((label?.length ?? 0) < 4 || (link?.length ?? 0) < 4) return false;
+  const validateUserInput = ({ label, url }: Partial<Link>) => {
+    if (!label || !url) return false;
+    if ((label?.length ?? 0) < 4 || (url?.length ?? 0) < 4) return false;
     return true;
   };
 
   const handleAddNewLink = () => {
-    if (!validateUserInput(currentLink)) return;
-    setLinkItem((state) => [
-      ...state,
-      {
-        id: crypto.randomUUID(),
-        label: currentLink.label ?? "",
-        link: currentLink.link ?? "",
-      },
-    ]);
+    setError(null);
+    if (!validateUserInput(currentLink)) {
+      return setError("label and link must be more than 4 chatacters");
+    }
+    addLink({
+      id: Date.now(),
+      userId: "",
+      label: currentLink.label ?? "",
+      url: currentLink.url ?? "",
+      icon: "",
+      order: linkItem.length,
+    });
     setCurrentLink({});
   };
 
@@ -46,20 +47,21 @@ export function LinksSectionInput() {
         />
         <input
           type="text"
-          name="link"
-          id="link"
+          name="url"
+          id="url"
           placeholder="example.com"
-          value={currentLink.link ?? ""}
+          value={currentLink.url ?? ""}
           onChange={(e) =>
-            setCurrentLink((state) => ({ ...state, link: e.target.value }))
+            setCurrentLink((state) => ({ ...state, url: e.target.value }))
           }
         />
       </div>
+      {error && <p>{error}</p>}
 
       <button onClick={handleAddNewLink}>Add new link</button>
       <div className="flex flex-col gap-4">
         {linkItem.map((link) => (
-          <LinkItemInput label={link.label} key={link.id} link={link.link} />
+          <LinkItemInput label={link.label} key={link.id} link={link.url} />
         ))}
       </div>
     </div>

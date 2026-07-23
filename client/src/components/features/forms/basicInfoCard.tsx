@@ -1,4 +1,12 @@
+"use client";
+import { useLinkInputFormStore } from "@/store/formInput/useLinkInputFormStore";
+
 export function BasicInfoCard() {
+  const name = useLinkInputFormStore((state) => state.name);
+  const setName = useLinkInputFormStore((state) => state.setName);
+  const username = useLinkInputFormStore((state) => state.username);
+  const setUsername = useLinkInputFormStore((state) => state.setUsername);
+
   return (
     <div className="rounded-lg bg-gray-400 p-4">
       <p>Basic info</p>
@@ -9,6 +17,8 @@ export function BasicInfoCard() {
             type="text"
             name="name"
             id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="h-10 rounded-md bg-gray-300"
           />
         </div>
@@ -18,6 +28,8 @@ export function BasicInfoCard() {
             type="text"
             name="description"
             id="description"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className="h-10 rounded-md bg-gray-300"
           />
         </div>

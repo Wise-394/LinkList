@@ -1,3 +1,4 @@
+"use client";
 import { useLinkInputFormStore } from "@/store/formInput/useLinkInputFormStore";
 
 export function PhotosCard() {
