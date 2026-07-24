@@ -7,7 +7,7 @@ interface LinkInputForm {
   name: string;
   username: string;
   description: string;
-  link: Link[];
+  linkItems: Link[];
   setProfilePhoto: (file: File | null) => void;
   setCoverPhoto: (file: File | null) => void;
   setName: (name: string) => void;
@@ -22,11 +22,12 @@ export const useLinkInputFormStore = create<LinkInputForm>((set) => ({
   name: "",
   username: "",
   description: "",
-  link: [],
+  linkItems: [],
   setProfilePhoto: (file) => set({ profilePhoto: file }),
   setCoverPhoto: (file) => set({ coverPhoto: file }),
   setName: (name) => set({ name }),
   setUsername: (username) => set({ username }),
   setDescription: (description) => set({ description }),
-  addLink: (link) => set((state) => ({ link: [...state.link, link] })),
+  addLink: (link) =>
+    set((state) => ({ linkItems: [...state.linkItems, link] })),
 }));

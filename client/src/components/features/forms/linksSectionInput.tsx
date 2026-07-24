@@ -5,7 +5,7 @@ import { useLinkInputFormStore } from "@/store/formInput/useLinkInputFormStore";
 import { Link } from "../../../../../types/types";
 
 export function LinksSectionInput() {
-  const linkItem = useLinkInputFormStore((state) => state.link);
+  const linkItems = useLinkInputFormStore((state) => state.linkItems);
   const addLink = useLinkInputFormStore((state) => state.addLink);
   const [error, setError] = useState<string | null>(null);
   const [currentLink, setCurrentLink] = useState<Partial<Link>>({});
@@ -27,7 +27,7 @@ export function LinksSectionInput() {
       label: currentLink.label ?? "",
       url: currentLink.url ?? "",
       icon: "",
-      order: linkItem.length,
+      order: linkItems.length,
     });
     setCurrentLink({});
   };
@@ -60,7 +60,7 @@ export function LinksSectionInput() {
 
       <button onClick={handleAddNewLink}>Add new link</button>
       <div className="flex flex-col gap-4">
-        {linkItem.map((link) => (
+        {linkItems.map((link) => (
           <LinkItemInput label={link.label} key={link.id} link={link.url} />
         ))}
       </div>

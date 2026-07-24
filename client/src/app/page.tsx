@@ -4,6 +4,36 @@ import { LoginModal } from "@/components/features/modal/loginModal";
 import { ProfileCard } from "@/components/features/Profile/profileCard";
 
 export default function Home() {
+  const sampleProfileCard = {
+    name: "juan dela cruz",
+    description: "a very long description for my profile",
+    linkItems: [
+      {
+        id: 1,
+        userId: "1",
+        label: "Instagram",
+        url: "https://instagram.com/juandelacruz",
+        icon: "instagram",
+        order: 1,
+      },
+      {
+        id: 2,
+        userId: "1",
+        label: "Twitter",
+        url: "https://twitter.com/juandelacruz",
+        icon: "twitter",
+        order: 2,
+      },
+      {
+        id: 3,
+        userId: "1",
+        label: "GitHub",
+        url: "https://github.com/juandelacruz",
+        icon: "github",
+        order: 3,
+      },
+    ],
+  };
   return (
     <>
       <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
@@ -22,8 +52,12 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center p-2">
-            <div className="h-[60vh] max-w-80">
-              <ProfileCard />
+            <div className="h-[60vh] w-80">
+              <ProfileCard
+                name={sampleProfileCard.name}
+                description={sampleProfileCard.description}
+                linkItems={sampleProfileCard.linkItems}
+              />
             </div>
           </div>
         </main>

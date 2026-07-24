@@ -11,7 +11,7 @@ export function PictureSection() {
           sizes="100vw"
         />
       </div>
-      <div className="absolute bottom-0 left-1/2 aspect-square w-24 -translate-x-1/2 translate-y-1/4">
+      <div className="absolute bottom-0 left-1/2 aspect-square w-30 -translate-x-1/2 translate-y-1/4">
         <Image
           src="https://placehold.co/600x400/60a5fa/ffffff.png"
           alt=""
