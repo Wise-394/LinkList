@@ -61,7 +61,12 @@ export function LinksSectionInput() {
       <button onClick={handleAddNewLink}>Add new link</button>
       <div className="flex flex-col gap-4">
         {linkItems.map((link) => (
-          <LinkItemInput label={link.label} key={link.id} link={link.url} />
+          <LinkItemInput
+            label={link.label}
+            key={link.id}
+            link={link.url}
+            id={link.id}
+          />
         ))}
       </div>
     </div>

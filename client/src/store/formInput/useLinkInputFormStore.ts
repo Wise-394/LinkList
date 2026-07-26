@@ -14,6 +14,7 @@ interface LinkInputForm {
   setUsername: (username: string) => void;
   setDescription: (description: string) => void;
   addLink: (link: Link) => void;
+  deleteLinkItem: (id: number) => void;
 }
 
 export const useLinkInputFormStore = create<LinkInputForm>((set) => ({
@@ -30,4 +31,9 @@ export const useLinkInputFormStore = create<LinkInputForm>((set) => ({
   setDescription: (description) => set({ description }),
   addLink: (link) =>
     set((state) => ({ linkItems: [...state.linkItems, link] })),
+  deleteLinkItem: (id) => {
+    set((state) => ({
+      linkItems: state.linkItems.filter((value) => value.id !== id),
+    }));
+  },
 }));
