@@ -7,13 +7,16 @@ import { useLinkInputFormStore } from "@/store/formInput/useLinkInputFormStore";
 import { useShallow } from "zustand/react/shallow";
 
 export default function ProfilePage() {
-  const { name, description, linkItems } = useLinkInputFormStore(
-    useShallow((state) => ({
-      name: state.name,
-      description: state.description,
-      linkItems: state.linkItems,
-    })),
-  );
+  const { name, description, linkItems, profilePhoto, coverPhoto } =
+    useLinkInputFormStore(
+      useShallow((state) => ({
+        name: state.name,
+        description: state.description,
+        linkItems: state.linkItems,
+        profilePhoto: state.profilePhoto,
+        coverPhoto: state.coverPhoto,
+      })),
+    );
 
   return (
     <div className="flex w-full grid-cols-2 flex-col gap-2 p-2 md:grid">
@@ -25,8 +28,10 @@ export default function ProfilePage() {
         </div>
       </div>
       <div className="flex flex-1 items-center justify-center">
-        <div className="max-w-90">
+        <div className="w-full max-w-90 px-2">
           <ProfileCard
+            profilePhoto={profilePhoto}
+            coverPhoto={coverPhoto}
             name={name}
             description={description}
             linkItems={linkItems}

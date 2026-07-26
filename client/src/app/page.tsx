@@ -54,6 +54,8 @@ export default function Home() {
           <div className="flex flex-col items-center justify-center p-2">
             <div className="h-[60vh] w-80">
               <ProfileCard
+                profilePhoto={null}
+                coverPhoto={null}
                 name={sampleProfileCard.name}
                 description={sampleProfileCard.description}
                 linkItems={sampleProfileCard.linkItems}
