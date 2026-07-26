@@ -1,5 +1,4 @@
 import { createClient } from "@/config/supabase/client";
-import { createClient as createServerClient } from "@/config/supabase/server";
 
 export async function getTokenClient() {
   const supabase = createClient();

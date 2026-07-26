@@ -18,7 +18,7 @@ export function LinkItemInput({ id, label, link }: Props) {
         type="text"
         value={label}
         readOnly
-        className="w-full rounded-md bg-gray-400 p-2 sm:max-w-80"
+        className="sm:max-jw-80 w-full rounded-md bg-gray-400 p-2"
       />
       <input
         type="text"
