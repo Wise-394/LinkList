@@ -31,6 +31,7 @@ export default function ProfilePage() {
       </div>
       <div className="flex flex-1 flex-col items-center justify-center">
         <div className="flex w-full max-w-90 flex-col gap-3 px-2">
+          45
           <ProfileCard
             profilePhoto={profilePhoto}
             coverPhoto={coverPhoto}

@@ -3,6 +3,9 @@ import { ImageFiles } from '../../types/imageFiles';
 import { uploadPhoto } from '../../service/ImageService/uploadPhoto';
 import { updateUserInfo } from '../../service/userServices/updateUserInfo';
 import { User } from '../../../../types/types';
+import { deleteAllLinkOfUser } from '../../service/linkService/deleteAllLinkOfUser';
+import { addLink } from '../../service/linkService/addLink';
+import { NewLink } from '../../../../types/types';
 
 export async function updateUserInfoController(
   req: Request & { files?: ImageFiles },
@@ -41,8 +44,27 @@ export async function updateUserInfoController(
       coverImageUrl: coverURL,
       profileImageUrl: profileURL,
     };
+
+    //profile infos
     const newUserInfo = await updateUserInfo(supabase, user);
-    return res.json({ ...newUserInfo });
+
+    //links
+    //delete all user previous link to add fresh ones
+    const linkItems: Array<NewLink> = data.links.map((link: NewLink) => ({
+      userId: req.user!.id,
+      label: link.label,
+      url: link.url,
+      icon: link.icon,
+      order: link.order,
+    }));
+
+    await deleteAllLinkOfUser(supabase, req.user!.id);
+    const newLinkItems = await addLink(supabase, linkItems);
+
+    return res.json({
+      userInfo: { ...newUserInfo },
+      linkItems: { ...newLinkItems },
+    });
   } catch (error) {
     next(error);
   }

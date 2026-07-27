@@ -17,6 +17,7 @@ export interface Link {
   icon: string;
   order: number;
 }
+export type NewLink = Omit<Link, "id">;
 
 export interface UserInfo {
   user: User;
