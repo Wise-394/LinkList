@@ -5,6 +5,8 @@ import { LinksSectionInput } from "@/components/features/forms/linksSectionInput
 import { ProfileCard } from "@/components/features/Profile/profileCard";
 import { useLinkInputFormStore } from "@/store/formInput/useLinkInputFormStore";
 import { useShallow } from "zustand/react/shallow";
+import { ButtonWithIcon } from "@/components/ui/buttonWithIcon";
+import { IoSave } from "react-icons/io5";
 
 export default function ProfilePage() {
   const { name, description, linkItems, profilePhoto, coverPhoto } =
@@ -27,8 +29,8 @@ export default function ProfilePage() {
           <LinksSectionInput />
         </div>
       </div>
-      <div className="flex flex-1 items-center justify-center">
-        <div className="w-full max-w-90 px-2">
+      <div className="flex flex-1 flex-col items-center justify-center">
+        <div className="flex w-full max-w-90 flex-col gap-3 px-2">
           <ProfileCard
             profilePhoto={profilePhoto}
             coverPhoto={coverPhoto}
@@ -36,6 +38,7 @@ export default function ProfilePage() {
             description={description}
             linkItems={linkItems}
           />
+          <ButtonWithIcon icon={<IoSave />} label="Save" onClick={() => {}} />
         </div>
       </div>
     </div>

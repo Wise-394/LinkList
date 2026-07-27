@@ -5,6 +5,8 @@ export interface User {
   bio: string;
   profileImageUrl: string;
   coverImageUrl: string;
+  profileImageRaw?: File;
+  coverImageRaw?: File;
 }
 
 export interface Link {
@@ -14,6 +16,11 @@ export interface Link {
   url: string;
   icon: string;
   order: number;
+}
+
+export interface UserInfo {
+  user: User;
+  LinkItems: Link[];
 }
 
 interface PageViews {
