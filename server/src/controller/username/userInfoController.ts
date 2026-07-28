@@ -36,11 +36,10 @@ export async function updateUserInfoController(
       type: 'cover-photo',
     });
 
-    const user: User = {
+    const user: Omit<User, 'username'> = {
       id: req.user!.id,
       bio: data.bio,
       name: data.name,
-      username: data.username,
       coverImageUrl: coverURL,
       profileImageUrl: profileURL,
     };
@@ -50,6 +49,7 @@ export async function updateUserInfoController(
 
     //links
     //delete all user previous link to add fresh ones
+    console.log('data.links from frontend:', data.links); // debug
     const linkItems: Array<NewLink> = data.links.map((link: NewLink) => ({
       userId: req.user!.id,
       label: link.label,
@@ -57,6 +57,7 @@ export async function updateUserInfoController(
       icon: link.icon,
       order: link.order,
     }));
+    console.log('linkItems to insert:', linkItems); // debug
 
     await deleteAllLinkOfUser(supabase, req.user!.id);
     const newLinkItems = await addLink(supabase, linkItems);

@@ -11,13 +11,22 @@ interface Params {
 export async function uploadPhoto({ supabase, userID, file, type }: Params) {
   try {
     const ext = file.mimetype.split('/')[1];
-    const { data, error } = await supabase.storage
+    const path = `${userID}/avatar.${ext}`;
+
+    const { error } = await supabase.storage
       .from(type)
-      .upload(`${userID}/avatar.${ext}`, file.buffer);
+      .upload(path, file.buffer, {
+        contentType: file.mimetype,
+        upsert: true,
+      });
 
     if (error) throw error;
 
-    return data.fullPath;
+    const { data: publicUrlData } = supabase.storage
+      .from(type)
+      .getPublicUrl(path);
+
+    return publicUrlData.publicUrl;
   } catch (error) {
     console.log(error);
     throw new AppError('failed to uplaod profile photo');
