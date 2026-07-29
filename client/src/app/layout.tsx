@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { TanstackProvider } from "./providers/tanstackProviders";
 import { AuthProvider } from "./providers/authProviders";
+import { ToastContainer } from "react-toastify";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,6 +34,12 @@ export default function RootLayout({
         <body className="flex min-h-screen flex-col">
           <AuthProvider />
           {children}
+          <ToastContainer
+            hideProgressBar={true}
+            theme="dark"
+            autoClose={1000}
+            position="bottom-right"
+          />
         </body>
       </TanstackProvider>
     </html>

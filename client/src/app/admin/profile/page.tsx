@@ -9,7 +9,7 @@ import { ButtonWithIcon } from "@/components/ui/buttonWithIcon";
 import { IoSave } from "react-icons/io5";
 import { UseUpdateUserInfo } from "@/hooks/user/useUpdateUserInfo";
 import { useClientSupabase } from "@/hooks/supabase/useClientSupabase";
-
+import { toast } from "react-toastify";
 export default function ProfilePage() {
   const supabase = useClientSupabase();
   const { updateUserInfo, isPendingUserInfo, errorUserInfo } =
@@ -45,6 +45,7 @@ export default function ProfilePage() {
       accessToken: session.access_token,
     };
     updateUserInfo(userInfo);
+    toast.success("test");
   };
 
   return (
