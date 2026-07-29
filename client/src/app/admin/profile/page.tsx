@@ -10,6 +10,11 @@ import { IoSave } from "react-icons/io5";
 import { UseUpdateUserInfo } from "@/hooks/user/useUpdateUserInfo";
 import { useClientSupabase } from "@/hooks/supabase/useClientSupabase";
 import { toast } from "react-toastify";
+import {
+  validateBasicInfo,
+  validateImage,
+} from "@/service/validation/validateUserInfo";
+
 export default function ProfilePage() {
   const supabase = useClientSupabase();
   const { updateUserInfo, isPendingUserInfo, errorUserInfo } =
@@ -33,6 +38,13 @@ export default function ProfilePage() {
     if (!session) {
       console.error("No user logged in");
       return;
+    }
+
+    const basicInfoError = validateBasicInfo(name, description);
+    const imageError = validateImage(profilePhoto, coverPhoto);
+
+    if (basicInfoError || imageError) {
+      return toast.error("cannot submit");
     }
 
     const userInfo = {
