@@ -51,7 +51,7 @@ export async function updateUserInfoController(
     //delete all user previous link to add fresh ones
     console.log('data.links from frontend:', data.links); // debug
     const linkItems: Array<NewLink> = data.links.map((link: NewLink) => ({
-      userId: req.user!.id,
+      userID: req.user!.id,
       label: link.label,
       url: link.url,
       icon: link.icon,

@@ -1,5 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { AppError } from '../utils/appErrors';
+import sharp from 'sharp';
 
 interface Params {
   supabase: SupabaseClient;
@@ -10,13 +11,17 @@ interface Params {
 
 export async function uploadPhoto({ supabase, userID, file, type }: Params) {
   try {
-    const ext = file.mimetype.split('/')[1];
-    const path = `${userID}/avatar.${ext}`;
+    // convert image to webp
+    const webpBuffer = await sharp(file.buffer)
+      .webp({ quality: 80 })
+      .toBuffer();
+
+    const path = `${userID}/picture.webp`;
 
     const { error } = await supabase.storage
       .from(type)
-      .upload(path, file.buffer, {
-        contentType: file.mimetype,
+      .upload(path, webpBuffer, {
+        contentType: 'image/webp',
         upsert: true,
       });
 
