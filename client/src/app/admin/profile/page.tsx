@@ -9,11 +9,6 @@ import { ButtonWithIcon } from "@/components/ui/buttonWithIcon";
 import { IoSave } from "react-icons/io5";
 import { UseUpdateUserInfo } from "@/hooks/user/useUpdateUserInfo";
 import { useClientSupabase } from "@/hooks/supabase/useClientSupabase";
-import { toast } from "react-toastify";
-import {
-  validateBasicInfo,
-  validateImage,
-} from "@/service/validation/validateUserInfo";
 
 export default function ProfilePage() {
   const supabase = useClientSupabase();
@@ -40,13 +35,6 @@ export default function ProfilePage() {
       return;
     }
 
-    const basicInfoError = validateBasicInfo(name, description);
-    const imageError = validateImage(profilePhoto, coverPhoto);
-
-    if (basicInfoError || imageError) {
-      return toast.error("cannot submit");
-    }
-
     const userInfo = {
       name,
       bio: description,
@@ -57,7 +45,6 @@ export default function ProfilePage() {
       accessToken: session.access_token,
     };
     updateUserInfo(userInfo);
-    toast.success("test");
   };
 
   return (
@@ -66,6 +53,7 @@ export default function ProfilePage() {
         <div className="flex max-h-[90vh] w-full max-w-120 flex-col gap-2 p-2">
           <PhotosCard />
           <BasicInfoCard />
+          {errorUserInfo && <p>{errorUserInfo.message}</p>}
           <LinksSectionInput />
         </div>
       </div>
@@ -80,7 +68,8 @@ export default function ProfilePage() {
           />
           <ButtonWithIcon
             icon={<IoSave />}
-            label="Save"
+            label={isPendingUserInfo ? "saving" : "save"}
+            disabled={isPendingUserInfo}
             onClick={() => handleSave()}
           />
         </div>

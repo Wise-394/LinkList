@@ -1,11 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
 import { fetchBackend } from "@/service/utils/fetchBackend";
 import { Link } from "../../../../types/types";
+import {
+  validateBasicInfo,
+  validateImage,
+} from "@/service/validation/validateUserInfo";
+import { toast } from "react-toastify";
 
 interface Params {
   name: string;
   bio: string;
-  profileImage: File; //fix add validations
+  profileImage: File;
   coverImage: File;
   links: Link[];
   userID: string;
@@ -14,6 +19,19 @@ interface Params {
 
 const putUser = async (userInfo: Params) => {
   try {
+    const basicInfoError = validateBasicInfo(userInfo.name, userInfo.bio);
+    const imageError = validateImage(
+      userInfo.profileImage,
+      userInfo.coverImage,
+    );
+
+    if (basicInfoError) {
+      throw new Error(basicInfoError);
+    }
+    if (imageError) {
+      throw new Error(imageError);
+    }
+
     const formData = new FormData();
     formData.append(
       "data",
@@ -40,8 +58,10 @@ const putUser = async (userInfo: Params) => {
         body: formData,
       },
     });
+    toast.success("succesfully added");
     return data;
   } catch (err) {
+    toast.error("failed to save user info");
     throw err;
   }
 };

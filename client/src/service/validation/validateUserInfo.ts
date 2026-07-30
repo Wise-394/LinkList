@@ -1,16 +1,16 @@
 export function validateImage(profile: File | null, cover: File | null) {
   if (!profile || !cover) {
-    return true;
+    return "Profile and cover must not be empty";
   }
   return false;
 }
 
 export function validateBasicInfo(name: string, description: string) {
   if (!name || !description) {
-    return true;
+    return "name and description cannot be empty";
   }
   if (name.length < 4) {
-    return true;
+    return "name must be more than 4 characters";
   }
   return false;
 }
