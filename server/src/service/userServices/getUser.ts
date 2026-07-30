@@ -2,10 +2,10 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import { AppError } from '../utils/appErrors';
 import { User } from '../../../../types/types';
 
-export async function getUsername(
+export async function getUser(
   supabase: SupabaseClient,
   id: string,
-): Promise<User[]> {
+): Promise<User> {
   try {
     const { data, error } = await supabase
       .from('users')

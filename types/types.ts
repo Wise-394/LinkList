@@ -21,7 +21,7 @@ export type NewLink = Omit<Link, "id">;
 
 export interface UserInfo {
   user: User;
-  LinkItems: Link[];
+  linkItems: Link[];
 }
 
 interface PageViews {

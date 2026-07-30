@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { updateUsername } from '../../service/userServices/updateUsername';
-import { getUsername } from '../../service/userServices/getUsername';
+import { getUser } from '../../service/userServices/getUser';
 
 export async function claimUsername(
   req: Request,
@@ -23,8 +23,8 @@ export async function getUsernameController(
   next: NextFunction,
 ) {
   try {
-    const username = getUsername(req.supabase!, req.user?.id!);
-    return res.json(username);
+    const user = getUser(req.supabase!, req.user?.id!);
+    return res.json(user);
   } catch (error) {
     return next(error);
   }

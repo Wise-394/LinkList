@@ -1,7 +1,11 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { AppError } from '../utils/appErrors';
+import { Link } from '../../../../types/types';
 
-export async function getLinks(supabase: SupabaseClient, userID: string) {
+export async function getLinks(
+  supabase: SupabaseClient,
+  userID: string,
+): Promise<Array<Link>> {
   try {
     const { data, error } = await supabase
       .from('link')

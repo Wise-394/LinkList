@@ -2,10 +2,12 @@ import type { NextFunction, Request, Response } from 'express';
 import { ImageFiles } from '../../types/imageFiles';
 import { uploadPhoto } from '../../service/ImageService/uploadPhoto';
 import { updateUserInfo } from '../../service/userServices/updateUserInfo';
-import { User } from '../../../../types/types';
+import { User, UserInfo } from '../../../../types/types';
 import { deleteAllLinkOfUser } from '../../service/linkService/deleteAllLinkOfUser';
 import { addLink } from '../../service/linkService/addLink';
 import { NewLink } from '../../../../types/types';
+import { getUser } from '../../service/userServices/getUser';
+import { getLinks } from '../../service/linkService/getLinks';
 
 export async function updateUserInfoController(
   req: Request & { files?: ImageFiles },
@@ -66,6 +68,21 @@ export async function updateUserInfoController(
       userInfo: { ...newUserInfo },
       linkItems: { ...newLinkItems },
     });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getUserInfoController(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const user = await getUser(req.supabase!, req.user?.id!);
+    const linkItems = await getLinks(req.supabase!, req.user?.id!);
+    const userInfo: UserInfo = { user, linkItems };
+    return res.json(userInfo);
   } catch (error) {
     next(error);
   }
