@@ -1,4 +1,7 @@
-export function validateImage(profile: File | null, cover: File | null) {
+export function validateImage(
+  profile: File | string | null,
+  cover: File | string | null,
+) {
   if (!profile || !cover) {
     return "Profile and cover must not be empty";
   }

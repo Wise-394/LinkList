@@ -7,8 +7,8 @@ interface Props {
   name: string;
   description: string;
   linkItems: Link[];
-  profilePhoto: File | null;
-  coverPhoto: File | null;
+  profilePhoto: File | null | string;
+  coverPhoto: File | null | string;
 }
 
 export function ProfileCard({

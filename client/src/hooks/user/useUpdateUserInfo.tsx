@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 interface Params {
   name: string;
   bio: string;
-  profileImage: File;
-  coverImage: File;
+  profileImage: File | string;
+  coverImage: File | string;
   links: Link[];
   userID: string;
   accessToken: string;
@@ -41,10 +41,10 @@ const putUser = async (userInfo: Params) => {
         links: userInfo.links,
       }),
     );
-    if (userInfo.profileImage) {
+    if (userInfo.profileImage instanceof File) {
       formData.append("profileImage", userInfo.profileImage);
     }
-    if (userInfo.coverImage) {
+    if (userInfo.coverImage instanceof File) {
       formData.append("coverImage", userInfo.coverImage);
     }
 

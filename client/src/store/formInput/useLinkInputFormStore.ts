@@ -1,20 +1,30 @@
 import { create } from "zustand";
 import { Link } from "../../../../types/types";
 
+type Photo = File | string | null;
+
 interface LinkInputForm {
-  profilePhoto: File | null;
-  coverPhoto: File | null;
+  profilePhoto: Photo;
+  coverPhoto: Photo;
   name: string;
   username: string;
   description: string;
   linkItems: Link[];
-  setProfilePhoto: (file: File | null) => void;
-  setCoverPhoto: (file: File | null) => void;
+  setProfilePhoto: (file: Photo) => void;
+  setCoverPhoto: (file: Photo) => void;
   setName: (name: string) => void;
   setUsername: (username: string) => void;
   setDescription: (description: string) => void;
   addLink: (link: Link) => void;
   deleteLinkItem: (id: number) => void;
+  initLinkInputForm: (data: {
+    profilePhoto: Photo;
+    coverPhoto: Photo;
+    name: string;
+    username: string;
+    description: string;
+    linkItems: Link[];
+  }) => void;
 }
 
 export const useLinkInputFormStore = create<LinkInputForm>((set) => ({
@@ -34,6 +44,16 @@ export const useLinkInputFormStore = create<LinkInputForm>((set) => ({
   deleteLinkItem: (id) => {
     set((state) => ({
       linkItems: state.linkItems.filter((value) => value.id !== id),
+    }));
+  },
+  initLinkInputForm: (data) => {
+    set((state) => ({
+      username: data.username,
+      name: data.name,
+      description: data.description,
+      coverPhoto: data.coverPhoto,
+      profilePhoto: data.profilePhoto,
+      linkItems: data.linkItems,
     }));
   },
 }));

@@ -3,31 +3,37 @@ import Image from "next/image";
 import { useEffect, useMemo } from "react";
 
 interface Props {
-  profilePhoto: File | null;
-  coverPhoto: File | null;
+  profilePhoto: File | null | string;
+  coverPhoto: File | null | string;
 }
 
 export function PictureSection({ profilePhoto, coverPhoto }: Props) {
-  const profileUrl = useMemo(
-    () => (profilePhoto ? URL.createObjectURL(profilePhoto) : null),
-    [profilePhoto],
-  );
-  const coverUrl = useMemo(
-    () => (coverPhoto ? URL.createObjectURL(coverPhoto) : null),
-    [coverPhoto],
-  );
+  const isProfileFile = profilePhoto instanceof File;
+  const isCoverFile = coverPhoto instanceof File;
+
+  const profileUrl = useMemo(() => {
+    if (!profilePhoto) return null;
+    if (typeof profilePhoto === "string") return profilePhoto;
+    return URL.createObjectURL(profilePhoto);
+  }, [profilePhoto]);
+
+  const coverUrl = useMemo(() => {
+    if (!coverPhoto) return null;
+    if (typeof coverPhoto === "string") return coverPhoto;
+    return URL.createObjectURL(coverPhoto);
+  }, [coverPhoto]);
 
   useEffect(() => {
     return () => {
-      if (profileUrl) URL.revokeObjectURL(profileUrl);
+      if (profileUrl && isProfileFile) URL.revokeObjectURL(profileUrl);
     };
-  }, [profileUrl]);
+  }, [profileUrl, isProfileFile]);
 
   useEffect(() => {
     return () => {
-      if (coverUrl) URL.revokeObjectURL(coverUrl);
+      if (coverUrl && isCoverFile) URL.revokeObjectURL(coverUrl);
     };
-  }, [coverUrl]);
+  }, [coverUrl, isCoverFile]);
 
   return (
     <div className="relative flex h-fit flex-col items-center">

@@ -8,10 +8,17 @@ import { useShallow } from "zustand/react/shallow";
 import { ButtonWithIcon } from "@/components/ui/buttonWithIcon";
 import { IoSave } from "react-icons/io5";
 import { UseUpdateUserInfo } from "@/hooks/user/useUpdateUserInfo";
-import { useClientSupabase } from "@/hooks/supabase/useClientSupabase";
+import { useGetUserInfo } from "@/hooks/user/useGetUserInfo";
+import { useSession } from "@/hooks/supabase/useSession";
 
 export default function ProfilePage() {
-  const supabase = useClientSupabase();
+  const session = useSession();
+
+  const { userInfo } = useGetUserInfo({
+    userID: session?.userID ?? "",
+    accessToken: session?.accessToken ?? "",
+  });
+
   const { updateUserInfo, isPendingUserInfo, errorUserInfo } =
     UseUpdateUserInfo();
   const { name, description, linkItems, profilePhoto, coverPhoto } =
@@ -25,11 +32,8 @@ export default function ProfilePage() {
         coverPhoto: state.coverPhoto,
       })),
     );
-  const handleSave = async () => {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
 
+  const handleSave = async () => {
     if (!session) {
       console.error("No user logged in");
       return;
@@ -41,8 +45,8 @@ export default function ProfilePage() {
       profileImage: profilePhoto!,
       coverImage: coverPhoto!,
       links: linkItems,
-      userID: session.user.id,
-      accessToken: session.access_token,
+      userID: session.userID,
+      accessToken: session.accessToken,
     };
     updateUserInfo(userInfo);
   };
