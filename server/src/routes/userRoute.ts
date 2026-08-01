@@ -4,7 +4,10 @@ import { claimUsername } from '../controller/username/usernameController';
 import { validateUsername } from '../controller/validation/validateUsername';
 import { handleValidationResult } from '../controller/validation/handleValidationErrors';
 import { upload } from '../config/multer';
-import { updateUserInfoController } from '../controller/username/userInfoController';
+import {
+  getUserInfoController,
+  updateUserInfoController,
+} from '../controller/username/userInfoController';
 
 export const userRouter = Router();
 
@@ -15,6 +18,7 @@ userRouter.post(
   handleValidationResult,
   claimUsername,
 );
+userRouter.get('/:userID', requireAuth, getUserInfoController); //fix this to no longer require auth
 
 userRouter.put(
   '/:userID',

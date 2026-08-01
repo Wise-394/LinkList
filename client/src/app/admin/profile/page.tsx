@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { BasicInfoCard } from "@/components/features/forms/basicInfoCard";
 import { PhotosCard } from "@/components/features/forms/photosCard";
 import { LinksSectionInput } from "@/components/features/forms/linksSectionInput";
@@ -21,17 +22,37 @@ export default function ProfilePage() {
 
   const { updateUserInfo, isPendingUserInfo, errorUserInfo } =
     UseUpdateUserInfo();
-  const { name, description, linkItems, profilePhoto, coverPhoto } =
-    useLinkInputFormStore(
-      useShallow((state) => ({
-        name: state.name,
-        username: state.username,
-        description: state.description,
-        linkItems: state.linkItems,
-        profilePhoto: state.profilePhoto,
-        coverPhoto: state.coverPhoto,
-      })),
-    );
+  const {
+    name,
+    description,
+    linkItems,
+    profilePhoto,
+    coverPhoto,
+    initLinkInputForm,
+  } = useLinkInputFormStore(
+    useShallow((state) => ({
+      name: state.name,
+      username: state.username,
+      description: state.description,
+      linkItems: state.linkItems,
+      profilePhoto: state.profilePhoto,
+      coverPhoto: state.coverPhoto,
+      initLinkInputForm: state.initLinkInputForm,
+    })),
+  );
+
+  useEffect(() => {
+    if (!userInfo) return;
+
+    initLinkInputForm({
+      username: userInfo.user.username,
+      name: userInfo.user.name,
+      description: userInfo.user.bio,
+      profilePhoto: userInfo.user.photoUrl,
+      coverPhoto: userInfo.user.coverPhotoUrl,
+      linkItems: userInfo.linkItems,
+    });
+  }, [userInfo, initLinkInputForm]);
 
   const handleSave = async () => {
     if (!session) {

@@ -3,8 +3,8 @@ export interface User {
   username: string;
   name: string;
   bio: string;
-  profileImageUrl: string;
-  coverImageUrl: string;
+  photoUrl: string;
+  coverPhotoUrl: string;
   profileImageRaw?: File;
   coverImageRaw?: File;
 }

@@ -42,8 +42,8 @@ export async function updateUserInfoController(
       id: req.user!.id,
       bio: data.bio,
       name: data.name,
-      coverImageUrl: coverURL,
-      profileImageUrl: profileURL,
+      photoUrl: coverURL,
+      coverPhotoUrl: profileURL,
     };
 
     //profile infos
