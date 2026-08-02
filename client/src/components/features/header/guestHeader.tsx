@@ -48,9 +48,6 @@ export function GuestHeader() {
         onClick={nav.onClick}
         className={cn(
           "flex flex-row items-center gap-2 rounded-full p-3 text-left text-sm transition-all",
-          variant === "desktop"
-            ? "text-neutral-300 hover:text-white"
-            : "text-neutral-200",
           nav.isPrimary &&
             "bg-cyan-500 px-5 font-bold text-black hover:scale-[1.03] hover:text-black hover:brightness-110",
         )}
@@ -61,7 +58,7 @@ export function GuestHeader() {
     ));
 
   return (
-    <header className="sticky top-0 z-10 flex h-[8vh] w-full flex-row items-center border-b border-neutral-900 bg-black/80 px-5">
+    <header className="sticky top-0 z-10 flex h-[8vh] w-full flex-row items-center border-b border-neutral-900 bg-black px-5">
       <div className="flex flex-row items-center gap-2">
         <h1 className="text-lg font-semibold tracking-tight text-white">
           LinkList
