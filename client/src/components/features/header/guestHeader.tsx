@@ -1,11 +1,21 @@
 "use client";
-import { IoMenu } from "react-icons/io5";
+import {
+  IoMenu,
+  IoClose,
+  IoLinkOutline,
+  IoInformationCircleOutline,
+  IoSparklesOutline,
+  IoLogInOutline,
+} from "react-icons/io5";
 import { useLoginModalStore } from "@/store/landingPage/useLoginModalStore";
 import { useState } from "react";
 import { cn } from "@/config/tailwind/clsx";
+
 interface NavLinks {
   label: string;
-  onClick: () => void;
+  icon: React.ReactNode;
+  onClick?: () => void;
+  isPrimary?: boolean;
 }
 
 export function GuestHeader() {
@@ -14,52 +24,70 @@ export function GuestHeader() {
 
   const navLinks: NavLinks[] = [
     {
+      label: "about",
+      icon: <IoInformationCircleOutline size={16} />,
+    },
+    {
+      label: "features",
+      icon: <IoSparklesOutline size={16} />,
+    },
+    {
       label: "login",
+      icon: <IoLogInOutline size={16} />,
+      isPrimary: true,
       onClick: () => {
         openModal();
       },
     },
   ];
 
-  return (
-    <header className="sticky z-10 flex h-[8vh] w-full flex-row items-center p-5">
-      <h1 className="text-lg">LinkList</h1>
+  const renderNavLinks = (variant: "desktop" | "mobile") =>
+    navLinks.map((nav) => (
       <button
-        className="ml-auto md:hidden"
-        onClick={() => {
-          console.log("hamburger clicked");
-          setIsNavOpen((state) => !state);
-        }}
+        key={nav.label}
+        onClick={nav.onClick}
+        className={cn(
+          "flex flex-row items-center gap-2 rounded-full p-3 text-left text-sm transition-all",
+          variant === "desktop"
+            ? "text-neutral-300 hover:text-white"
+            : "text-neutral-200",
+          nav.isPrimary &&
+            "bg-cyan-500 px-5 font-bold text-black hover:scale-[1.03] hover:text-black hover:brightness-110",
+        )}
       >
-        <IoMenu />
+        {nav.icon}
+        {nav.label}
       </button>
-      <nav className="ml-auto hidden flex-row md:flex">
-        {navLinks.map((nav) => (
-          <button
-            key={nav.label}
-            onClick={nav.onClick}
-            className="p-3 text-left"
-          >
-            {nav.label}
-          </button>
-        ))}
+    ));
+
+  return (
+    <header className="sticky top-0 z-10 flex h-[8vh] w-full flex-row items-center border-b border-neutral-900 bg-black/80 px-5">
+      <div className="flex flex-row items-center gap-2">
+        <h1 className="text-lg font-semibold tracking-tight text-white">
+          LinkList
+        </h1>
+      </div>
+
+      <button
+        className="ml-auto text-white md:hidden"
+        onClick={() => setIsNavOpen((state) => !state)}
+        aria-label="Toggle menu"
+      >
+        {isNavOpen ? <IoClose size={22} /> : <IoMenu size={22} />}
+      </button>
+
+      <nav className="ml-auto hidden flex-row items-center gap-1 md:flex">
+        {renderNavLinks("desktop")}
       </nav>
+
       <div className="absolute top-full left-0 w-full overflow-hidden">
         <nav
           className={cn(
-            "flex flex-col bg-gray-400 transition-transform duration-300 ease-in-out md:hidden",
+            "flex flex-col gap-1 border-b border-neutral-900 bg-black/95 p-3 transition-transform duration-300 ease-in-out md:hidden",
             isNavOpen ? "translate-y-0" : "-translate-y-full",
           )}
         >
-          {navLinks.map((nav) => (
-            <button
-              key={nav.label}
-              onClick={nav.onClick}
-              className="p-3 text-left"
-            >
-              {nav.label}
-            </button>
-          ))}
+          {renderNavLinks("mobile")}
         </nav>
       </div>
     </header>
