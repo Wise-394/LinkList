@@ -19,7 +19,7 @@ export default async function proxy(req: NextRequest) {
 
     try {
       const backendRes = await fetchBackend({
-        endpoint: "/username",
+        endpoint: "/user",
         options: {
           headers: {
             Authorization: `Bearer ${accessToken}`,

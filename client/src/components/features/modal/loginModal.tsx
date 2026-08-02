@@ -1,25 +1,13 @@
 "use client";
-import { ButtonWithIcon } from "@/components/ui/buttonWithIcon";
+import { GoogleButton } from "../button/googleButton";
 import { useLoginModalStore } from "@/store/landingPage/useLoginModalStore";
 import { useEffect, useRef } from "react";
-import { IoLogoGoogle } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
-import { useClientSupabase } from "@/hooks/supabase/useClientSupabase";
 
 export function LoginModal() {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const isOpen = useLoginModalStore((state) => state.isOpen);
   const closeModal = useLoginModalStore((state) => state.closeModal);
-  const supabase = useClientSupabase();
-
-  const handleGoogleLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=/admin/profile`,
-      },
-    });
-  };
 
   useEffect(() => {
     if (isOpen) {
@@ -32,22 +20,22 @@ export function LoginModal() {
   return (
     <dialog
       ref={dialogRef}
-      className="relative m-auto w-[80vw] max-w-80 rounded-2xl p-4 text-center backdrop:bg-black/70"
+      className="relative m-auto w-[85vw] max-w-96 rounded-2xl border border-white/10 bg-gray-900 p-6 text-center text-white shadow-2xl backdrop:bg-black/80"
     >
-      <div className="flex flex-col items-center">
-        <h1 className="text-2xl font-bold">Welcome To LinkList</h1>
-        <h2 className="">Sign In to continue </h2>
-        <div className="mt-8 w-full">
-          <ButtonWithIcon
-            icon={<IoLogoGoogle />}
-            label="Sign in With Google"
-            onClick={() => handleGoogleLogin()}
-          />
-        </div>
+      <button
+        onClick={() => closeModal()}
+        className="absolute top-4 right-4 text-white/60 transition-colors hover:text-white"
+      >
+        <IoClose className="text-xl" />
+      </button>
 
-        <button onClick={() => closeModal()} className="absolute top-2 right-3">
-          <IoClose className="text-lg" />
-        </button>
+      <div className="flex flex-col items-center pt-2">
+        <h1 className="text-2xl font-bold">Welcome to LinkList</h1>
+        <p className="mt-2 text-sm text-white/60">Sign in to continue</p>
+
+        <div className="mt-8 w-full">
+          <GoogleButton />
+        </div>
       </div>
     </dialog>
   );

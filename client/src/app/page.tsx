@@ -6,7 +6,8 @@ import { ProfileCard } from "@/components/features/Profile/profileCard";
 export default function Home() {
   const sampleProfileCard = {
     name: "juan dela cruz",
-    description: "a very long description for my profile",
+    description:
+      "Hi!  welcome to my profile. You can find my other socials here:",
     profilePhotoURL:
       "https://api.dicebear.com/9.x/notionists/svg?seed=juande&backgroundColor=b6e3f4",
     coverPhotoURL:
@@ -48,15 +49,24 @@ export default function Home() {
               Just <span className="text-cyan-500">One Link.</span> <br /> For
               All of your Socials
             </h1>
-            <h2 className="text-lg lg:text-2xl">
+            <h2 className="mt-4 text-lg text-white/80 lg:text-2xl">
               Build a clean page for all your socials in minutes. <br /> No
               code, no clutter, all simplified.
             </h2>
-            <div className="mt-5 flex w-full max-w-70 items-center justify-center px-2 md:justify-start">
+            <div className="mt-5 flex w-full max-w-70 items-center justify-center gap-4 px-2 md:justify-start">
               <LoginButton />
+              <a
+                href="#about"
+                className="rounded-2xl p-2 text-white/70 outline outline-white/70 hover:text-white hover:outline-white"
+              >
+                Learn more
+              </a>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center p-2">
+          <div className="flex flex-col items-center justify-center gap-2 p-2 text-center">
+            <p className="font-bold">
+              linklist.com/<span className="text-cyan-500">juandelacruz</span>
+            </p>
             <div className="h-[60vh] w-full max-w-80">
               <ProfileCard
                 profilePhoto={sampleProfileCard.profilePhotoURL}
@@ -66,6 +76,10 @@ export default function Home() {
                 linkItems={sampleProfileCard.linkItems}
               />
             </div>
+            <p className="">
+              Create a webpage like this <br /> using
+              <span className="text-cyan-500"> LinkList!</span>
+            </p>
           </div>
         </main>
       </div>

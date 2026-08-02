@@ -12,7 +12,7 @@ export function LoginButton() {
         "flex items-center gap-2 rounded-full",
         "bg-cyan-500 px-6 py-3 text-sm font-semibold text-black",
         "shadow-md transition-all duration-200",
-        "hover:bg-cyan-600 hover:shadow-lg active:scale-95",
+        "hover:bg-cyan-400 hover:shadow-lg active:scale-95",
       )}
     >
       <IoLogIn size={18} /> Join Now

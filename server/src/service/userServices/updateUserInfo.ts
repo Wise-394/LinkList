@@ -12,8 +12,8 @@ export async function updateUserInfo(
       .update({
         name: user.name,
         bio: user.bio,
-        photoUrl: user.profileImageUrl,
-        coverPhotoUrl: user.coverImageUrl,
+        photoUrl: user.photoUrl,
+        coverPhotoUrl: user.coverPhotoUrl,
       })
       .eq('id', user.id)
       .select()

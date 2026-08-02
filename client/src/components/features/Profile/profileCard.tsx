@@ -19,7 +19,7 @@ export function ProfileCard({
   coverPhoto,
 }: Props) {
   return (
-    <div className="flex h-full w-full flex-col overflow-hidden rounded-2xl bg-gray-600">
+    <div className="flex h-full w-full flex-col overflow-hidden rounded-2xl bg-black outline outline-white/50">
       <PictureSection profilePhoto={profilePhoto} coverPhoto={coverPhoto} />
       <div className="flex flex-1 flex-col gap-3 px-3 pb-3 outline-5">
         <ProfileDescriptionSection name={name} description={description} />
