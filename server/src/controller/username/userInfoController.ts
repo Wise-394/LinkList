@@ -79,8 +79,17 @@ export async function getUserInfoController(
   next: NextFunction,
 ) {
   try {
-    const user = await getUser(req.supabase!, req.user?.id!);
-    const linkItems = await getLinks(req.supabase!, req.user?.id!);
+    const userID = req.params.userID as string;
+
+    if (!userID) {
+      return res.status(400).json({ error: 'empty id' });
+    }
+
+    const user = await getUser(req.supabase!, userID);
+    if (!user) {
+      return res.status(400).json({ error: 'username doesnt exist' });
+    }
+    const linkItems = await getLinks(req.supabase!, userID);
     const userInfo: UserInfo = { user, linkItems };
     return res.json(userInfo);
   } catch (error) {

@@ -3,18 +3,14 @@ import { fetchBackend } from "@/service/utils/fetchBackend";
 
 interface Params {
   userID: string;
-  accessToken: string;
 }
 
-const getUserInfo = ({ userID, accessToken }: Params) => {
+const getUserInfo = ({ userID }: Params) => {
   try {
     const data = fetchBackend({
       endpoint: `user/${userID}`,
       options: {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       },
     });
     return data;
@@ -23,11 +19,11 @@ const getUserInfo = ({ userID, accessToken }: Params) => {
   }
 };
 
-export const useGetUserInfo = ({ userID, accessToken }: Params) => {
+export const useGetUserInfo = ({ userID }: Params) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["user", userID],
-    queryFn: () => getUserInfo({ userID, accessToken }),
-    enabled: !!userID && !!accessToken,
+    queryFn: () => getUserInfo({ userID }),
+    enabled: !!userID,
   });
   return { userInfo: data, isUserInfoLoading: isLoading, userInfoError: error };
 };

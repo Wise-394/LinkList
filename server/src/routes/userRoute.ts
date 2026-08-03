@@ -6,10 +6,11 @@ import {
   getUserInfoController,
   updateUserInfoController,
 } from '../controller/username/userInfoController';
+import { publicSupabase } from '../controller/authentication/publicSupabase';
 
 export const userRouter = Router();
 
-userRouter.get('/:userID', requireAuth, getUserInfoController); //fix this to no longer require auth
+userRouter.get('/:userID', publicSupabase, getUserInfoController);
 
 userRouter.put(
   '/:userID',
