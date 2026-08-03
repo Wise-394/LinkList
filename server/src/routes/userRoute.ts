@@ -1,8 +1,6 @@
 import { Router } from 'express';
 import { requireAuth } from '../controller/authentication/requireAuth';
-import { claimUsername } from '../controller/username/usernameController';
-import { validateUsername } from '../controller/validation/validateUsername';
-import { handleValidationResult } from '../controller/validation/handleValidationErrors';
+
 import { upload } from '../config/multer';
 import {
   getUserInfoController,
@@ -11,13 +9,6 @@ import {
 
 export const userRouter = Router();
 
-userRouter.post(
-  '/',
-  requireAuth,
-  validateUsername,
-  handleValidationResult,
-  claimUsername,
-);
 userRouter.get('/:userID', requireAuth, getUserInfoController); //fix this to no longer require auth
 
 userRouter.put(

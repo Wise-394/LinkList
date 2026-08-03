@@ -23,8 +23,13 @@ export async function getUsernameController(
   next: NextFunction,
 ) {
   try {
-    const user = getUser(req.supabase!, req.user?.id!);
-    return res.json(user);
+    if (!req.params.userID) {
+      return res.status(400).json({ error: 'invalid id' });
+    }
+    const userID = req.params.userID as string;
+    const user = await getUser(req.supabase!, userID);
+
+    return res.json(user?.username ?? null);
   } catch (error) {
     return next(error);
   }

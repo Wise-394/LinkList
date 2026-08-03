@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { getSupabaseClient } from '../../config/supabase';
+import { getSupabaseClient } from '../../config/supabaseClient';
 
 export async function requireAuth(
   req: Request,

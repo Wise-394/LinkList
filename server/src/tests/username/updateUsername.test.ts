@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import request from 'supertest';
 import app from '../../app';
-import { getSupabaseClient } from '../../config/supabase';
+import { getSupabaseClient } from '../../config/supabaseClient';
 
 vi.mock('../../config/supabase', () => ({
   getSupabaseClient: vi.fn(),

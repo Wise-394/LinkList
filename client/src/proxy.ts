@@ -13,27 +13,33 @@ export default async function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL("/", req.nextUrl.origin));
   }
 
-  if (pathname.startsWith("/onboarding")) {
-    const { data: sessionData } = await supabase.auth.getSession();
-    const accessToken = sessionData.session?.access_token;
+  const { data: sessionData } = await supabase.auth.getSession();
+  const accessToken = sessionData.session?.access_token;
 
-    try {
-      const backendRes = await fetchBackend({
-        endpoint: "/user",
-        options: {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
+  let username: string | null = null;
+
+  try {
+    const backendRes = await fetchBackend({
+      endpoint: `username/${data.claims.sub}`,
+      options: {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
         },
-      });
+      },
+    });
 
-      if (backendRes?.username) {
-        return NextResponse.redirect(new URL("/", req.nextUrl.origin));
-      }
-    } catch (err) {
-      console.error("fetchBackend failed in proxy:", err);
-      return NextResponse.redirect(new URL("/", req.nextUrl.origin));
-    }
+    username = backendRes ?? null;
+  } catch (err) {
+    console.error("fetchBackend failed in proxy:", err);
+    return NextResponse.redirect(new URL("/", req.nextUrl.origin));
+  }
+
+  if (pathname.startsWith("/onboarding") && username) {
+    return NextResponse.redirect(new URL("/", req.nextUrl.origin));
+  }
+
+  if (!pathname.startsWith("/onboarding") && !username) {
+    return NextResponse.redirect(new URL("/onboarding", req.nextUrl.origin));
   }
 
   return getResponse();
